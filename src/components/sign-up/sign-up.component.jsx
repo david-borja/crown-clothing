@@ -37,7 +37,7 @@ class SignUp extends React.Component {
       });
 
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
 
   };
@@ -47,7 +47,7 @@ class SignUp extends React.Component {
 
     this.setState({[name]: value});
   }
-  
+
   render() {
     const { displayName, email, password, confirmPassword } = this.state;
     return (
