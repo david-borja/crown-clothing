@@ -1,8 +1,9 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
-const config = { // We get this config object when we create our app on Firebase
+const config = {
+  // We get this config object when we create our app on Firebase
   apiKey: "AIzaSyCaYXJqfI0WgNnrhtZdOO0h0roIqeIManw",
   authDomain: "crown-db-c4836.firebaseapp.com",
   projectId: "crown-db-c4836",
@@ -11,36 +12,50 @@ const config = { // We get this config object when we create our app on Firebase
   appId: "1:230270736315:web:06e8cec74acdca515e569e",
 };
 
+firebase.initializeApp(config);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-  const snapShot = await userRef.get()
 
-  if(!snapShot.exists) {
+  const snapShot = await userRef.get();
+
+
+  if (!snapShot.exists) {
     const { displayName, email } = userAuth;
-    const createdAt = new Date()
+    const createdAt = new Date();
 
     try {
-      userRef.set({
+      await userRef.set({
         displayName,
         email,
         createdAt,
-        ...additionalData
-      })
-    } catch(error) {
-      console.log('error creating user', error.message);
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
     }
   }
   return userRef;
-}
+};
 
-firebase.initializeApp(config);
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc(); // makes new document reference objects, with its own unique id
+    batch.set(newDocRef, obj);
+  })
+
+  return await batch.commit(); // this returns a promise 
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account'});
+provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
