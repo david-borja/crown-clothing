@@ -6,6 +6,7 @@ const config = {
   // We get this config object when we create our app on Firebase
   apiKey: "AIzaSyCaYXJqfI0WgNnrhtZdOO0h0roIqeIManw",
   authDomain: "crown-db-c4836.firebaseapp.com",
+  databaseURL: "https://crown-db-c4836.firebaseio.com",
   projectId: "crown-db-c4836",
   storageBucket: "crown-db-c4836.appspot.com",
   messagingSenderId: "230270736315",
@@ -19,7 +20,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
   const snapShot = await userRef.get();
-
 
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
