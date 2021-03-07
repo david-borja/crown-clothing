@@ -54,14 +54,14 @@ export const ContentContainer = styled.div`
   position: absolute;
 `;
 
-export const Title = styled.div`
+export const Title = styled.span`
   font-weight: bold;
-  margin: 0 6px 0;
+  margin-bottom: 6px;
   font-size: 22px;
   color: #4a4a4a;
 `;
 
-export const SubtitleSpan = styled.div`
+export const SubtitleSpan = styled.span`
   font-weight: lighter;
   font-size: 16px;
 `;
