@@ -7,9 +7,8 @@ export const SignInAndSignUpContainer = styled.div`
   margin: 30px auto;
 
   @media screen and (max-width: 800px) {
+    width: 90vw;
     flex-direction: column;
-    width: 90%;
-    align-items: center;
 
     > *:first-child {
       margin-bottom: 50px;
