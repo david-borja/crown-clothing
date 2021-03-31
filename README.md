@@ -2,7 +2,7 @@
 
 ## What's about?
 
-CROWN Clothing is an E-commerce app built with create-react-app
+CROWN Clothing is a mobile responsive E-commerce app built with create-react-app
 
 ## Tech
 
@@ -26,3 +26,13 @@ The app has been refactored:
 - From Redux Thunk to Redux Sagas (current)
 - From Redux (current) to ContextAPI -> check the <a href="https://github.com/david-borja/crown-clothing-context">ContextAPI version</a>
 - From Redux to GraphQL + Apollo Client -> check the <a href="https://github.com/david-borja/crown-clothing-graphql">GraphQL + Apollo version</a>
+
+## Views
+
+### Web
+
+<img src="https://github.com/david-borja/crown-clothing/blob/main/images/homepage-1200x1000.png" width="48%"/> <img src="https://github.com/david-borja/crown-clothing/blob/main/images/cartdropdown-1200x1000.png" width="48%"/> 
+
+### Mobile
+
+<img src="https://github.com/david-borja/crown-clothing/blob/main/images/homepage-iphone.png" width="24%"/> <img src="https://github.com/david-borja/crown-clothing/blob/main/images/shoppage-iphone.png" width="24%"/> <img src="https://github.com/david-borja/crown-clothing/blob/main/images/signinsignup-iphone.png" width="24%"/> <img src="https://github.com/david-borja/crown-clothing/blob/main/images/checkout-iphone.png" width="24%"/>
