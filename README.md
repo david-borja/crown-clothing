@@ -2,7 +2,7 @@
 
 ## What's about?
 
-CROWN Clothing is a mobile responsive E-commerce app built with create-react-app
+CROWN Clothing is a mobile responsive E-commerce progressive web app built with create-react-app
 
 ## Tech
 
