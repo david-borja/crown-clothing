@@ -7,7 +7,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import { SignUpContainer, SignUpTitle } from "./sign-up.styles";
 import { signUpStart } from "../../redux/user/user.actions";
 
-const SignUp = ({ signUpStart }) => {
+const SignUp = ({ signUpStart, error }) => {
   const [userCredentials, setCredentials] = useState({
     displayName: "",
     email: "",
@@ -32,10 +32,16 @@ const SignUp = ({ signUpStart }) => {
     setCredentials({ ...userCredentials, [name]: value });
   };
 
+  console.log({ error });
+
   return (
     <SignUpContainer>
       <SignUpTitle>I do not have an account</SignUpTitle>
       <span>Sign up with your email and password</span>
+
+      {error && error.signUpError && (
+        <div className="error-message">{error.signUpError.message}</div>
+      )}
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
           type="text"
@@ -75,8 +81,12 @@ const SignUp = ({ signUpStart }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  error: state.user.error,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials)),
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

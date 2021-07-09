@@ -14,12 +14,15 @@ const CollectionPageContainer = lazy(() =>
   import("../collection/collection.container")
 );
 
-const ShopPage = ({ fetchCollectionsStart, match }) => {
+const ShopPage = ({ fetchCollectionsStart, match, errorMessage }) => {
   useEffect(() => {
     fetchCollectionsStart();
   }, [fetchCollectionsStart]);
 
-  return (
+  console.log({ errorMessage });
+  return errorMessage ? (
+    <div className="error-message">{errorMessage}</div>
+  ) : (
     <div className="shop-page">
       <Suspense fallback={<Spinner />}>
         <Route
@@ -36,8 +39,12 @@ const ShopPage = ({ fetchCollectionsStart, match }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  errorMessage: state.shop.errorMessage,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
-export default connect(null, mapDispatchToProps)(ShopPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);

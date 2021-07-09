@@ -15,14 +15,14 @@ import {
   ButtonsContainer,
 } from "./sign-in.styles";
 
-const SignIn = ({ emailSignInStart, googleSignInStart }) => {
+const SignIn = ({ emailSignInStart, googleSignInStart, error }) => {
   const [userCredentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  
+
   const { email, password } = userCredentials;
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     emailSignInStart(email, password);
@@ -37,6 +37,10 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
     <SignInContainer>
       <SignInTitle>I already have an account</SignInTitle>
       <span>Sign in with your email and password</span>
+
+      {error && error.signInError && (
+        <div className="error-message">{error.signInError.message}</div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -56,6 +60,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
           handleChange={handleChange}
           required
         />
+
         <ButtonsContainer>
           <CustomButton type="submit">Sign In</CustomButton>
           <CustomButton
@@ -71,10 +76,14 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  error: state.user.error,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   emailSignInStart: (email, password) =>
     dispatch(emailSignInStart({ email, password })),
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
