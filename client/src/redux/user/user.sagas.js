@@ -20,7 +20,11 @@ import {
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
-    const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
+    const userRef = yield call(
+      createUserProfileDocument,
+      userAuth,
+      additionalData
+    );
     const userSnapshot = yield userRef.get();
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
@@ -60,8 +64,8 @@ export function* signOut() {
   try {
     yield auth.signOut();
     yield put(signOutSuccess());
-  } catch(error) {
-    yield put (signOutFailure(error));
+  } catch (error) {
+    yield put(signOutFailure(error));
   }
 }
 
@@ -95,7 +99,7 @@ export function* onCheckUserSession() {
 }
 
 export function* onSignOutStart() {
-  yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
+  yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
 }
 
 export function* onSignUpSuccess() {
@@ -109,6 +113,6 @@ export function* userSagas() {
     call(onCheckUserSession),
     call(onSignOutStart),
     call(onSignUpStart),
-    call(onSignUpSuccess)
+    call(onSignUpSuccess),
   ]);
 }
