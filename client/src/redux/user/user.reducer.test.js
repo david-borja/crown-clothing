@@ -36,7 +36,9 @@ describe("userReducer", () => {
       })
     ).toEqual({
       ...INITIAL_STATE,
-      error: "Error. Couldn't sign up user ",
+      error: {
+        signUpError: "Error. Couldn't sign up user ",
+      },
     });
   });
 
@@ -59,7 +61,7 @@ describe("userReducer", () => {
       })
     ).toEqual({
       ...INITIAL_STATE,
-      error: "Error. Couldn't sign in user ",
+      error: { signInError: "Error. Couldn't sign in user " },
     });
   });
 
@@ -88,7 +90,7 @@ describe("userReducer", () => {
     ).toEqual({
       ...INITIAL_STATE,
       currentUser: mockCurrentUser,
-      error: "Error. Couldn't sign out user ",
+      error: { signOutError: "Error. Couldn't sign out user " },
     });
   });
 });
