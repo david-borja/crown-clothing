@@ -32,7 +32,7 @@ const SignUp = ({ signUpStart, error }) => {
     setCredentials({ ...userCredentials, [name]: value });
   };
 
-  console.log({ error });
+  // console.log({ error });
 
   return (
     <SignUpContainer>

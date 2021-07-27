@@ -23,6 +23,11 @@ const SignIn = ({ emailSignInStart, googleSignInStart, error }) => {
 
   const { email, password } = userCredentials;
 
+  // This log will show the latest state
+  // useEffect(() => {
+  //   console.log(`from useEffect: ${email}, ${password}`);
+  // });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     emailSignInStart(email, password);
@@ -31,6 +36,8 @@ const SignIn = ({ emailSignInStart, googleSignInStart, error }) => {
   const handleChange = (event) => {
     const { value, name } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
+    // This log will show one character behind
+    // console.log(`from handleChange: ${email}, ${password}`);
   };
 
   return (
